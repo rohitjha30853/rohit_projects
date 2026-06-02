@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: mmm-agg-qa
+    runtime: python
+    plan: free
+    rootDir: mmm_qa
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn mmm_agg_qa:app --bind 0.0.0.0:$PORT --workers 1 --timeout 120
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12.7"
+
+  - type: web
+    name: mmm-feature-qa
+    runtime: python
+    plan: free
+    rootDir: mmm_qa
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn mmm_feature_qa:app --bind 0.0.0.0:$PORT --workers 1 --timeout 120
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12.7"
